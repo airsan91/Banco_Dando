@@ -1,2 +1,4 @@
-package modelo;public class SistemaBanco {
+package modelo;
+
+public class SistemaBanco {
 }
