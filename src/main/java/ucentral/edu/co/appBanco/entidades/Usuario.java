@@ -15,10 +15,8 @@ import java.io.Serializable;
 @ToString
 public class Usuario implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO_REL")
-    @SequenceGenerator(name = "SEQ_USUARIO_REL", sequenceName = "SEQ_USUARIO_REL", allocationSize = 1)
     @Column(name = "USU_ID_USUARIO", nullable = false)
-    private long serial;
+    private int codigo;
 
     @Column(name = "USU_NOMBRE", nullable = false)
     private String nombreUsuario;

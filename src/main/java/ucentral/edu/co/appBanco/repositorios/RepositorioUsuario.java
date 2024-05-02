@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import ucentral.edu.co.appBanco.entidades.Usuario;
 
 @Repository
-public interface RepositorioUsuario extends CrudRepository<Usuario, String>{
+public interface RepositorioUsuario extends CrudRepository<Usuario, Integer>{
 
 
 

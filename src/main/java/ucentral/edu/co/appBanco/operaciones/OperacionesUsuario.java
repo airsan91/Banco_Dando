@@ -1,8 +1,9 @@
 package ucentral.edu.co.appBanco.operaciones;
 
 
-import ucentral.edu.co.appBanco.dto.UsuarioDto;
+
+import ucentral.edu.co.appBanco.entidades.Usuario;
 
 public interface OperacionesUsuario {
-   UsuarioDto crear(UsuarioDto usuario);
+   Usuario crear(Usuario usuario);
 }
