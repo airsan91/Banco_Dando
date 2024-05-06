@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Universidad</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5 mb-4">Crear Usuario</h1>
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/accioncrear}" method="post" th:object="${usuariollenar}">
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label">NombreUsuario:</label>
+                    <input id="nombreUsuario" type="text" class="form-control" th:field="*{nombreUsuario}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="correoUsuario" class="form-label">Correo:</label>
+                    <input id="correoUsuario" type="text" class="form-control" th:field="*{correoUsuario}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="telefonoUsuario" class="form-label">Telefono:</label>
+                    <input id="telefonoUsuario" type="text" class="form-control" th:field="*{telefonoUsuario}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="contrasena" class="form-label">Contrasena:</label>
+                    <input id="contrasena" type="text" class="form-control" th:field="*{contrasena}" required autofocus>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <a class="btn btn-secondary mt-3" href="#" th:href="@{http://localhost:8862/}">Volver</a>
+</div>
+</body>
+</html>

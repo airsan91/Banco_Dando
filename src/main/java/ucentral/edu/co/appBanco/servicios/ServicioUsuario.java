@@ -23,7 +23,11 @@ public class ServicioUsuario implements OperacionesUsuario {
 
     @Override
     public Usuario crear(Usuario usuario) {
+
         return repositorioUsuario.save(usuario);
     }
+    public boolean existeUsuario(Integer codigo){
+        return repositorioUsuario.existsById(codigo);
     }
+}
 

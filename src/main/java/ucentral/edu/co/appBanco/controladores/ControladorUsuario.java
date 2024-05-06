@@ -15,11 +15,38 @@ import ucentral.edu.co.appBanco.servicios.ServicioUsuario;
 import java.util.logging.Logger;
 
 
-
+@Controller
 public class ControladorUsuario {
     @Autowired
     ServicioUsuario servicioUsuario;
 
-    public void crearUsuario(Usuario usuario){servicioUsuario.crear(usuario);}
-}
 
+    @GetMapping({"/usuario/nuevo"})
+    public String cargarUsuario(Model model){
+        Usuario usuariollenar= new Usuario();
+
+        model.addAttribute("usuariollenar",usuariollenar);
+        System.out.println("PAso por aca formulario");
+        return "formcrearusuario";
+    }
+
+    @GetMapping({"/usuario/iniciar"})
+    public String iniciarUsuario(Model model){
+        Usuario usuariollenar= new Usuario();
+
+        model.addAttribute("usuariollenar",usuariollenar);
+        System.out.println("PAso por aca formulario");
+        return "formcrearusuario";
+    }
+
+
+    @PostMapping({"/accioncrear"})
+    public String accioncrear(@ModelAttribute("usuariollenar")Usuario usuario){
+        System.out.println("Paso por aca para guardar formulario");
+        System.out.println(usuario);
+        this.servicioUsuario.crear(usuario);
+        return "redirect:http://localhost:8862/";
+    }
+    public void crearUsuario(Usuario usuario){servicioUsuario.crear(usuario);}
+
+}
