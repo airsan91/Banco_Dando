@@ -3,6 +3,8 @@ package ucentral.edu.co.appBanco.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @Builder
 @Table(name = "TRANSACCIONES_REL") // Cambio de nombre de tabla
 @ToString
-public class Transacciones {
+public class Transacciones implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)

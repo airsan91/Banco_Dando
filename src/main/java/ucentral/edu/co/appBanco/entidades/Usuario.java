@@ -1,10 +1,7 @@
 package ucentral.edu.co.appBanco.entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 @Data
@@ -13,6 +10,7 @@ import java.io.Serializable;
 @Entity(name="Usuario")
 @Table(name = "USUARIOS_REL") // Cambio de nombre de tabla
 @ToString
+@Builder
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +24,7 @@ public class Usuario implements Serializable {
     private String correoUsuario;
 
     @Column(name = "USU_TELEFONO", nullable = false)
-    private String telefonoUsuario;
+    private long telefonoUsuario;
 
     @Column(name = "USU_CONTRASENA", nullable = false)
     private String contrasena;

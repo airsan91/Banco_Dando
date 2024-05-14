@@ -30,14 +30,6 @@ public class ControladorUsuario {
         return "formcrearusuario";
     }
 
-    @GetMapping({"/usuario/iniciar"})
-    public String iniciarUsuario(Model model){
-        Usuario usuariollenar= new Usuario();
-
-        model.addAttribute("usuariollenar",usuariollenar);
-        System.out.println("PAso por aca formulario");
-        return "formcrearusuario";
-    }
 
 
     @PostMapping({"/accioncrear"})
@@ -47,6 +39,6 @@ public class ControladorUsuario {
         this.servicioUsuario.crear(usuario);
         return "redirect:http://localhost:8862/";
     }
-    public void crearUsuario(Usuario usuario){servicioUsuario.crear(usuario);}
+    public  Usuario crearUsuario(Usuario usuario){return servicioUsuario.crear(usuario);}
 
 }
