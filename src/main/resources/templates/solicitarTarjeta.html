@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solicitar Tarjeta</title>
+</head>
+<body>
+<h1>Solicitar Tarjeta</h1>
+<table>
+    <tr>
+        <th>Usuario</th>
+        <th>Request</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="solicitarTarjeta : ${solicitarTarjetas}">
+        <td th:text="${solicitarTarjeta.usuario}"></td>
+        <td th:text="${solicitarTarjeta.request}"></td>
+        <td>
+            <form th:action="@{/acceptRequest}" method="post">
+                <input type="hidden" th:value="${solicitarTarjeta.id}" name="requestId" />
+                <input type="submit" value="Accept" />
+            </form>
+            <form th:action="@{/rejectRequest}" method="post">
+                <input type="hidden" th:value="${solicitarTarjeta.id}" name="requestId" />
+                <input type="submit" value="Reject" />
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
