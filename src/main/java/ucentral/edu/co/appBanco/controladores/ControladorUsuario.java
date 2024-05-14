@@ -27,7 +27,7 @@ public class ControladorUsuario {
 
         model.addAttribute("usuariollenar",usuariollenar);
         System.out.println("PAso por aca formulario");
-        return "formcrearusuario";
+        return "formcrearUsuario";
     }
 
 
