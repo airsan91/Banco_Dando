@@ -20,7 +20,13 @@ public class ControladorInicio {
         System.out.println("Paso por aca para iniciar");
         return "iniciarsesionUsuario";
     }
-
+    @Controller
+    public class ControladorPAginaPrincipal {
+        @GetMapping({"/usuario/principal"})
+        public String principal(Model model){
+            return "pantallaUsuario";
+        }
+    }
 
 
 }
