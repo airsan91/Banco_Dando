@@ -26,8 +26,8 @@ public class ServicioUsuario implements OperacionesUsuario {
 
         return repositorioUsuario.save(usuario);
     }
-    public boolean existeUsuario(Integer codigo){
-        return repositorioUsuario.existsById(codigo);
+
+    public Usuario auntentificar(String nombreUsuario, String contrasena) {
+        return repositorioUsuario.findByNombreUsuarioAndContrasena(nombreUsuario, contrasena);
     }
 }
-

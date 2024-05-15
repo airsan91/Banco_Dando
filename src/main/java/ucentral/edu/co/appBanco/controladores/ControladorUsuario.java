@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import ucentral.edu.co.appBanco.entidades.Usuario;
 import ucentral.edu.co.appBanco.servicios.ServicioUsuario;
 
@@ -20,6 +21,17 @@ public class ControladorUsuario {
     @Autowired
     ServicioUsuario servicioUsuario;
 
+
+    @PostMapping("/usuario/autenticar")
+    public String autenticar(@RequestBody Usuario Usuario) {
+        Usuario usuario = servicioUsuario.auntentificar(Usuario.getNombreUsuario(), Usuario.getContrasena());
+
+        if (usuario != null) {
+            return "listaTransacciones";
+        } else {
+            return "formcrearUsuario";
+        }
+    }
 
     @GetMapping({"/usuario/nuevo"})
     public String cargarUsuario(Model model){
