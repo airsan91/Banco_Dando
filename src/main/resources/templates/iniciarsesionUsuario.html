@@ -12,7 +12,7 @@
     <h1 class="mt-5 mb-4">Iniciar Sesión</h1>
     <div class="card">
         <div class="card-body">
-            <form th:action="@{/accioncrear}" method="post" th:object="${usuariollenar}">
+            <form th:action="@{/usuario/autenticar}" method="post" th:object="${usuariollenar}">
                 <div class="mb-3">
                     <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
                     <input id="nombreUsuario" type="text" class="form-control" th:field="*{nombreUsuario}" required autofocus>
@@ -22,7 +22,7 @@
                     <input id="contrasena" type="password" class="form-control" th:field="*{contrasena}" required>
                 </div>
 
-                <a th:href="@{/usuario/autenticar}" class="btn btn-success btn-lg btn-block">iniciar sesion</a>
+                <a th:href="@{/transaccion/lista}" class="btn btn-success btn-lg btn-block">iniciar sesion</a>
             </form>
         </div>
     </div>

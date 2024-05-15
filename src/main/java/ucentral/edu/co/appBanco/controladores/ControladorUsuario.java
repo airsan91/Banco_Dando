@@ -26,10 +26,11 @@ public class ControladorUsuario {
     public String autenticar(@RequestBody Usuario Usuario) {
         Usuario usuario = servicioUsuario.auntentificar(Usuario.getNombreUsuario(), Usuario.getContrasena());
 
+
         if (usuario != null) {
-            return "listaTransacciones";
+            return "bienvenido";
         } else {
-            return "formcrearUsuario";
+            return "contraseña incorrecta";
         }
     }
 
