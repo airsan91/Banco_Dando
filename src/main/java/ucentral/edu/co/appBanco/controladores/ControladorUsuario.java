@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import ucentral.edu.co.appBanco.entidades.Usuario;
+import ucentral.edu.co.appBanco.operaciones.OperacionesUsuario;
 import ucentral.edu.co.appBanco.servicios.ServicioUsuario;
 
 import java.util.logging.Logger;
@@ -19,39 +20,24 @@ import java.util.logging.Logger;
 @Controller
 public class ControladorUsuario {
     @Autowired
-    ServicioUsuario servicioUsuario;
+    private OperacionesUsuario operacionesUsuario;
 
-
-    @PostMapping("/usuario/autenticar")
-    public String autenticar(@RequestBody Usuario Usuario) {
-        Usuario usuario = servicioUsuario.auntentificar(Usuario.getNombreUsuario(), Usuario.getContrasena());
-
-
-        if (usuario != null) {
-            return "bienvenido";
-        } else {
-            return "contraseña incorrecta";
-        }
-    }
 
     @GetMapping({"/usuario/nuevo"})
-    public String cargarUsuario(Model model){
-        Usuario usuariollenar= new Usuario();
+    public String cargarUsuario(Model model) {
+        Usuario usuariollenar = new Usuario();
 
-        model.addAttribute("usuariollenar",usuariollenar);
+        model.addAttribute("usuariollenar", usuariollenar);
         System.out.println("PAso por aca formulario");
         return "formcrearUsuario";
     }
 
 
-
     @PostMapping({"/accioncrear"})
-    public String accioncrear(@ModelAttribute("usuariollenar")Usuario usuario){
+    public String accioncrear(@ModelAttribute("usuariollenar") Usuario usuario) {
         System.out.println("Paso por aca para guardar formulario");
         System.out.println(usuario);
-        this.servicioUsuario.crear(usuario);
-        return "redirect:http://localhost:8862/";
+        operacionesUsuario.crear(usuario);
+        return "pantallaUsuario";
     }
-    public  Usuario crearUsuario(Usuario usuario){return servicioUsuario.crear(usuario);}
-
 }

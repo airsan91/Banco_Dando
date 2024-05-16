@@ -20,6 +20,9 @@ public class Usuario implements Serializable {
     @Column(name = "USU_NOMBRE", nullable = false)
     private String nombreUsuario;
 
+    @Column(name = "USU_CEDULA", nullable = false)
+    private long cedula;
+
     @Column(name = "USU_CORREO", nullable = false)
     private String correoUsuario;
 

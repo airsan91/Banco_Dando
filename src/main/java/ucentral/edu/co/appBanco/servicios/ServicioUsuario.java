@@ -27,7 +27,7 @@ public class ServicioUsuario implements OperacionesUsuario {
         return repositorioUsuario.save(usuario);
     }
 
-    public Usuario auntentificar(String nombreUsuario, String contrasena) {
-        return repositorioUsuario.findByNombreUsuarioAndContrasena(nombreUsuario, contrasena);
+    public Usuario findByNombreUsuario(String nombreUsuario) {
+        return repositorioUsuario.findByNombreUsuario(nombreUsuario);
     }
 }

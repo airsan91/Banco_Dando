@@ -9,7 +9,7 @@ import ucentral.edu.co.appBanco.entidades.Usuario;
 @Repository
 public interface RepositorioUsuario extends JpaRepository<Usuario, Integer> {
 
-   Usuario findByNombreUsuarioAndContrasena (String nombreUsuario, String contrasena);
+   Usuario findByNombreUsuario (String nombreUsuario);
 
     }
 

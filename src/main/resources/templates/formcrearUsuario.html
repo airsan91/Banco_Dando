@@ -18,6 +18,10 @@
                     <input id="nombreUsuario" type="text" class="form-control" th:field="*{nombreUsuario}" required autofocus>
                 </div>
                 <div class="mb-3">
+                    <label for="cedula" class="form-label">Cedula:</label>
+                    <input id="cedula" type="text" class="form-control" th:field="*{cedula}" required autofocus>
+                </div>
+                <div class="mb-3">
                     <label for="correoUsuario" class="form-label">Correo:</label>
                     <input id="correoUsuario" type="text" class="form-control" th:field="*{correoUsuario}" required autofocus>
                 </div>
@@ -34,7 +38,7 @@
             </form>
         </div>
     </div>
-    <a class="btn btn-secondary mt-3" href="#" th:href="@{http://localhost:8862/}">Volver</a>
+    <a class="btn btn-secondary mt-3" href="#" th:href="@{/usuario/principal}">Volver</a>
 </div>
 </body>
 </html>
