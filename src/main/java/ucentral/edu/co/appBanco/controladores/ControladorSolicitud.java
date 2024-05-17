@@ -20,14 +20,13 @@ public class ControladorSolicitud {
         Solicitud solicitudllenar= new Solicitud();
 
         model.addAttribute("solicitudllenar",solicitudllenar);
-        System.out.println("paso para registrar una nueva solicitud");
+
         return "formcrearSolicitud";
     }
 
     @PostMapping({"/accioncrearsolicitud"})
     public String accioncrearsolicitud(@ModelAttribute("solicitudllenar")Solicitud solicitud){
-        System.out.println("guardo la solicitud");
-        System.out.println(solicitud);
+
         this.serviciosSolicitud.crear(solicitud);
         return "listaTransacciones";
     }

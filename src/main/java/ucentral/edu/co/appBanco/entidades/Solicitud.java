@@ -23,7 +23,7 @@ public class Solicitud  implements Serializable {
     private String nombre;
 
     @Column(name="SOL_DOCUMENTO", nullable = false)
-    private String documento;
+    private long documento;
 
     @Column(name="SOL_INGRESOS", nullable = false)
     private long ingresos;

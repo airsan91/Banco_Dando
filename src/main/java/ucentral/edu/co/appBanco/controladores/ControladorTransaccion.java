@@ -21,7 +21,7 @@ public class ControladorTransaccion {
         for (Transacciones lasTransacciones: serviciosTransaccion.consultarT()){
             System.out.println(lasTransacciones);
         }
-        System.out.println("paso por aca");
+
         return "listaTransacciones";
     }
 
@@ -32,14 +32,13 @@ public class ControladorTransaccion {
 
         model.addAttribute("transaccionesllenar",transaccionesllenar);
 
-        System.out.println("paso por aca formulario");
+
         return "formcreatransaccion";
 
     }
 
     @PostMapping({"/accioncreartransaccion"})
     public String accioncrearTran(@ModelAttribute("transaccionllenar")Transacciones transacciones){
-        System.out.println("paso por aca para guardar formulario");
         System.out.println(transacciones);
         this.serviciosTransaccion.crear(transacciones);
         return "redirect:/transaccion/lista";
@@ -50,9 +49,5 @@ public class ControladorTransaccion {
         serviciosTransaccion.crear(transacciones);
     }
 
-    public Transacciones buscarTransaccion(int pk){
-        Transacciones transacciones= serviciosTransaccion.consultarPk(pk);
-        return  null;
-    }
 }
 

@@ -1,5 +1,6 @@
 package ucentral.edu.co.appBanco.controladores;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ public class ControladorInicio {
         Usuario usuariollenar= new Usuario();
 
         model.addAttribute("usuariollenar",usuariollenar);
-        System.out.println("Paso por aca para iniciar");
+
         return "iniciarsesionUsuario";
     }
     @Controller
