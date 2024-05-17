@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Solicitud</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5 mb-4">Crear Solicitud</h1>
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/accioncrearsolicitud}" method="post" th:object="${solicitudllenar}">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input id="nombre" type="text" class="form-control" th:field="*{nombre}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="documento" class="form-label">Numero de Documento:</label>
+                    <input id="documento" type="text" class="form-control" th:field="*{documento}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="ingresos" class="form-label">Cantidad de Ingresos:</label>
+                    <input id="ingresos" type="text" class="form-control" th:field="*{ingresos}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="gastos" class="form-label">Cantidad de Gastos :</label>
+                    <input id="gastos" type="text" class="form-control" th:field="*{gastos}" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="deudas" class="form-label">Cantidad de Deudas :</label>
+                    <input id="deudas" type="text" class="form-control" th:field="*{deudas}" required autofocus>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <a class="btn btn-secondary mt-3" href="#" th:href="@{/transaccion/lista}">Volver</a>
+</div>
+</body>
+</html>
