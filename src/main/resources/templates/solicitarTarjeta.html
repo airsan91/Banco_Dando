@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Solicitar Tarjeta</title>
+    <title>Solicitudes De Tarjetas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,25 +52,27 @@
     </style>
 </head>
 <body>
-<h1>Solicitar Tarjeta</h1>
+<h1>Solicitudes!</h1>
 <table>
     <tr>
-        <th>Usuario</th>
-        <th>Request</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Ingresos</th>
+        <th>Gastos</th>
+        <th>Deudas</th>
         <th>Action</th>
     </tr>
-    <tr th:each="solicitarTarjeta : ${solicitarTarjetas}">
-        <td th:text="${solicitarTarjeta.usuario}"></td>
-        <td th:text="${solicitarTarjeta.request}"></td>
+    <tr th:each="solicitud : ${solicitudes}">
+        <td th:text="${solicitud.codigo}"></td>
+        <td th:text="${solicitud.nombre}"></td>
+        <td th:text="${solicitud.documento}"></td>
+        <td th:text="${solicitud.ingresos}"></td>
+        <td th:text="${solicitud.gastos}"></td>
+        <td th:text="${solicitud.deudas}"></td>
         <td>
-            <form th:action="@{/acceptRequest}" method="post">
-                <input type="hidden" th:value="${solicitarTarjeta.id}" name="requestId" />
-                <input type="submit" value="Accept" />
-            </form>
-            <form th:action="@{/rejectRequest}" method="post">
-                <input type="hidden" th:value="${solicitarTarjeta.id}" name="requestId" />
-                <input type="submit" value="Reject" />
-            </form>
+            <a th:href="@{/aceptarSolicitud/{codigo}(codigo=${solicitud.codigo})}" class="btn btn-success">Aceptar</a>
+            <a th:href="@{/rechazarSolicitud/{codigo}(codigo=${solicitud.codigo})}" class="btn btn-danger">Rechazar</a>
         </td>
     </tr>
 </table>

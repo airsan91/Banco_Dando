@@ -6,6 +6,8 @@ import ucentral.edu.co.appBanco.entidades.Solicitud;
 import ucentral.edu.co.appBanco.operaciones.OperacionesSolicitud;
 import ucentral.edu.co.appBanco.repositorios.RepositorioSolicitud;
 
+import java.util.Date;
+
 @Service
 public class ServiciosSolicitud implements OperacionesSolicitud {
 
@@ -13,8 +15,12 @@ public class ServiciosSolicitud implements OperacionesSolicitud {
     RepositorioSolicitud repositorioSolicitud;
 
     @Override
-    public Solicitud crear(Solicitud solicitud){
+    public Solicitud crear(Solicitud solicitud) {
+        solicitud.setFechaCreacion(new Date());
         return repositorioSolicitud.save(solicitud);
     }
 
+    public Solicitud getUltimaSolicitud() {
+        return repositorioSolicitud.findTopByOrderByFechaCreacionDesc();
+    }
 }

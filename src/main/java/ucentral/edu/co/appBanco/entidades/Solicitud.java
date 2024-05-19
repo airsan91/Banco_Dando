@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -33,4 +34,13 @@ public class Solicitud  implements Serializable {
 
     @Column(name="SOL_DEUDAS", nullable = false)
     private long deudas;
+
+    @Setter
+    @Column(name="SOL_ESTADO", nullable = false)
+    private String estado;
+
+    @Setter
+    @Getter
+    @Column(name="SOL_FECHA_CREACION", nullable = false)
+    private Date fechaCreacion;
 }

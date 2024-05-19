@@ -3,9 +3,12 @@ package ucentral.edu.co.appBanco.controladores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ucentral.edu.co.appBanco.DTO.EmpleadoDTO;
 import ucentral.edu.co.appBanco.entidades.Empleado;
 import ucentral.edu.co.appBanco.entidades.SolicitarTarjeta;
+import ucentral.edu.co.appBanco.entidades.Solicitud;
+import ucentral.edu.co.appBanco.repositorios.RepositorioEmpleado;
 import ucentral.edu.co.appBanco.servicios.ServicioEmpleado;
 import org.springframework.ui.Model;
 
@@ -16,16 +19,8 @@ public class ControladorEmpleado {
     @Autowired
     private ServicioEmpleado servicioEmpleado;
 
-    @PostMapping("/empleado/autenticar")
-    public String autenticar(@RequestBody EmpleadoDTO EmpleadoDTO){
-        Empleado empleado = servicioEmpleado.auntentificar(EmpleadoDTO.getUsuarioEmpleado(), EmpleadoDTO.getContrasena());
+    private RepositorioEmpleado repositorioEmpleado;
 
-        if(empleado != null){
-            return "Bienvenido";
-    }else {
-        return "Usuario o contraseña incorrecta";
-    }
-    }
     @GetMapping("/solicitarTarjeta")
     public String getAllSolicitarTarjeta(Model model) {
         List<SolicitarTarjeta> solicitarTarjetas = servicioEmpleado.getAllSolicitarTarjeta();
@@ -33,15 +28,39 @@ public class ControladorEmpleado {
         return "solicitarTarjeta";
     }
 
-    @PostMapping("/acceptRequest")
-    public String acceptRequest(@RequestParam("requestId") Long requestId) {
-        servicioEmpleado.acceptRequest(requestId);
+    @GetMapping("/aceptarSolicitud/{id}")
+    public String aceptarSolicitud(@PathVariable int id) {
+        servicioEmpleado.aceptarSolicitud(id);
         return "redirect:/solicitarTarjeta";
     }
 
-    @PostMapping("/rejectRequest")
-    public String rejectRequest(@RequestParam("requestId") Long requestId) {
-        servicioEmpleado.rejectRequest(requestId);
+    @GetMapping("/rechazarSolicitud/{id}")
+    public String rechazarSolicitud(@PathVariable int id) {
+        servicioEmpleado.rechazarSolicitud(id);
         return "redirect:/solicitarTarjeta";
     }
+
+    @GetMapping("/iniciarSesionEmpleado")
+    public String iniciarSesionEmpleado() {
+        return "inicioEmpleado";
+    }
+    @PostMapping("/inicioEmpleado")
+    public String iniciarSesion(@RequestParam String usuario, @RequestParam String contrasena, Model model) {
+        Empleado empleado = servicioEmpleado.auntentificar(usuario, contrasena);
+        if (empleado != null) {
+            model.addAttribute("empleado", empleado);
+            return "redirect:/solicitarTarjeta";
+        } else {
+            model.addAttribute("error", "Usuario o contraseña incorrectos");
+            return "inicioEmpleado"; // redirige de nuevo a la página de inicio de sesión
+        }
+    }
+    public Empleado createEmpleado(String usuario, String contrasena) {
+        Empleado empleado = new Empleado();
+        empleado.setUsuarioEmpleado(usuario);
+        empleado.setContrasena(contrasena);
+
+        return repositorioEmpleado.save(empleado);
+    }
+
 }

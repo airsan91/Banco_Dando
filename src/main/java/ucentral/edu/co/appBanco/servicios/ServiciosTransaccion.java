@@ -2,6 +2,8 @@ package ucentral.edu.co.appBanco.servicios;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
 import ucentral.edu.co.appBanco.operaciones.OperacionesTransacciones;
@@ -11,10 +13,13 @@ import java.util.List;
 
 @Service
 public class ServiciosTransaccion implements OperacionesTransacciones {
-    @Autowired
-    RepositorioTransaccion repositorioTransaccion;
+    private final RepositorioTransaccion repositorioTransaccion;
 
-   @Override
+    public ServiciosTransaccion(RepositorioTransaccion repositorioTransaccion) {
+        this.repositorioTransaccion = repositorioTransaccion;
+    }
+
+    @Override
     public Transacciones crear(Transacciones transacciones) {
         return repositorioTransaccion.save(transacciones);
     }
@@ -32,8 +37,8 @@ public class ServiciosTransaccion implements OperacionesTransacciones {
     }
 
     @Override
-    public List<Transacciones> consultarT() {
-        return  repositorioTransaccion.findAll();
+    public Page<Transacciones> consultarT(Pageable pageable) {
+        return  repositorioTransaccion.findAll(pageable);
     }
 
     @Override

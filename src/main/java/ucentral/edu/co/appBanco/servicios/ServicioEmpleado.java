@@ -1,16 +1,21 @@
 package ucentral.edu.co.appBanco.servicios;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import ucentral.edu.co.appBanco.entidades.Empleado;
 import ucentral.edu.co.appBanco.entidades.SolicitarTarjeta;
+import ucentral.edu.co.appBanco.entidades.Solicitud;
 import ucentral.edu.co.appBanco.entidades.Tarjeta_De_Credito;
 import ucentral.edu.co.appBanco.repositorios.RepositorioEmpleado;
 import ucentral.edu.co.appBanco.repositorios.RepositorioSolicitarTarjeta;
+import ucentral.edu.co.appBanco.repositorios.RepositorioSolicitud;
 import ucentral.edu.co.appBanco.repositorios.RepositorioTarjeta_De_Credito;
 
 import java.util.List;
@@ -19,11 +24,16 @@ import java.util.List;
 public class ServicioEmpleado {
     @Autowired
     private RepositorioEmpleado repositorioEmpleado;
+    @Autowired
     private RepositorioTarjeta_De_Credito RepositorioTarjeta_De_Credito;
+    @Autowired
     private RepositorioSolicitarTarjeta repositorioSolicitarTarjeta;
+    @Autowired
+    private RepositorioSolicitud repositorioSolicitud;
 
     public Empleado auntentificar(String usuario, String contrasena){
-        return repositorioEmpleado.findByUsuarioEmpleadoAndContrasena(usuario,contrasena);
+        Empleado empleado = repositorioEmpleado.findByUsuarioEmpleadoAndContrasena(usuario,contrasena);
+        return empleado;
     }
 
     public List<SolicitarTarjeta> getAllSolicitarTarjeta() {
@@ -50,4 +60,37 @@ public class ServicioEmpleado {
         }
     }
 
+    public Empleado createEmpleado(String usuario, String contrasena) {
+        Empleado empleado = new Empleado();
+        empleado.setUsuarioEmpleado(usuario);
+        empleado.setContrasena(contrasena);
+
+        return repositorioEmpleado.save(empleado);
+    }
+
+    @PostConstruct
+    public void init() {
+        if (repositorioEmpleado.findByUsuarioEmpleadoAndContrasena("SuperAdmin", "SuperPassword2024") == null) {
+            createEmpleado("SuperAdmin", "SuperPassword2024");
+        }
+
+
+    }
+
+    public Solicitud crearSolicitud(Solicitud solicitud) {
+        return repositorioSolicitud.save(solicitud);
+    }
+    public void aceptarSolicitud(int codigo) {
+        Solicitud solicitud = repositorioSolicitud.findById(codigo)
+                .orElseThrow(() -> new IllegalArgumentException("Solicitud no encontrada con el código: " + codigo));
+        solicitud.setEstado("Aceptada");
+        repositorioSolicitud.save(solicitud);
+    }
+
+    public void rechazarSolicitud(int codigo) {
+        Solicitud solicitud = repositorioSolicitud.findById(codigo)
+                .orElseThrow(() -> new IllegalArgumentException("Solicitud no encontrada con el código: " + codigo));
+        solicitud.setEstado("Rechazada");
+        repositorioSolicitud.save(solicitud);
+    }
 }
