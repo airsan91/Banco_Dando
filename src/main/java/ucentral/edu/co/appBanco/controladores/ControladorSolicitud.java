@@ -34,6 +34,27 @@ public class ControladorSolicitud {
         return "formcrearSolicitud";
     }
 
+    @PostMapping("/enviarSolicitud")
+    public String enviarSolicitud(@ModelAttribute Solicitud solicitud, Model model) {
+        Solicitud solicitudExistente = serviciosSolicitud.buscarPorCodigo(solicitud.getCodigo());
+        System.out.println("Solicitud recibida: " + solicitud);
+        System.out.println("Solicitud existente antes de la actualización: " + solicitudExistente);
+
+        if (solicitudExistente != null) {
+            solicitudExistente.setEstado("pendiente");
+            serviciosSolicitud.enviarSolicitud(solicitudExistente);
+            System.out.println("Solicitud existente después de la actualización: " + solicitudExistente);
+        } else {
+            solicitud.setEstado("pendiente");
+            solicitud.setCodigo(solicitud.getCodigo());
+            serviciosSolicitud.enviarSolicitud(solicitud);
+            System.out.println("Nueva solicitud después de la creación: " + solicitud);
+        }
+
+        model.addAttribute("solicitudes", serviciosSolicitud.getTodasLasSolicitudes());
+        return "solicitarTarjeta";
+    }
+
     @PostMapping({"/accioncrearsolicitud"})
     public String accioncrearsolicitud(@ModelAttribute("solicitudllenar")Solicitud solicitud, RedirectAttributes redirectAttributes){
         // Validación de los campos de la solicitud
@@ -50,21 +71,16 @@ public class ControladorSolicitud {
 
     @GetMapping("/estado-solicitud")
     public String estadoSolicitud(Model model, RedirectAttributes redirectAttributes) {
-        // Obtén la última solicitud creada
         Solicitud solicitud = serviciosSolicitud.getUltimaSolicitud();
 
         if (solicitud != null) {
-            // Agrega la solicitud al modelo
             model.addAttribute("solicitud", solicitud);
 
-            // Agrega un mensaje flash para mostrar en la página de lista de transacciones
             redirectAttributes.addFlashAttribute("message", "Estado de la solicitud: " + solicitud.getEstado());
         } else {
-            // Agrega un mensaje flash para mostrar en la página de lista de transacciones
             redirectAttributes.addFlashAttribute("message", "No hay solicitudes pendientes.");
         }
 
-        // Redirige al usuario a la página de lista de transacciones
         return "estadoSolicitud";
     }
 
@@ -81,5 +97,16 @@ public class ControladorSolicitud {
         List<Transacciones> transacciones = page.getContent();
         model.addAttribute("listatransaccionT", transacciones);
         return "listaTransacciones";
+    }
+    @GetMapping("/solicitar-tarjeta")
+    public String solicitarTarjeta(Model model) {
+        // Obtén todas las solicitudes
+        List<Solicitud> solicitudes = serviciosSolicitud.getTodasLasSolicitudes();
+
+        // Agrega las solicitudes al modelo
+        model.addAttribute("solicitudes", solicitudes);
+
+        // Devuelve la vista solicitar-tarjeta
+        return "solicitarTarjeta";
     }
 }

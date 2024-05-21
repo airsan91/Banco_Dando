@@ -18,6 +18,8 @@ public class Solicitud  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name= "SOL_CODIGO",nullable = false)
+    @Getter
+    @Setter
     private int codigo;
 
     @Column(name="SOL_NOMBRE", nullable = false)
@@ -36,6 +38,7 @@ public class Solicitud  implements Serializable {
     private long deudas;
 
     @Setter
+    @Getter
     @Column(name="SOL_ESTADO", nullable = false)
     private String estado;
 
@@ -43,4 +46,9 @@ public class Solicitud  implements Serializable {
     @Getter
     @Column(name="SOL_FECHA_CREACION", nullable = false)
     private Date fechaCreacion;
+
+    @Override
+    public String toString() {
+        return "Solicitud [codigo=" + codigo + ", estado=" + estado + "]";
+    }
 }
