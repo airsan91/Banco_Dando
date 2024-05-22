@@ -10,13 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ucentral.edu.co.appBanco.entidades.Solicitud;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
+import ucentral.edu.co.appBanco.entidades.Usuario;
 import ucentral.edu.co.appBanco.servicios.ServiciosSolicitud;
 import ucentral.edu.co.appBanco.servicios.ServiciosTransaccion;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ControladorSolicitud {
@@ -109,4 +112,12 @@ public class ControladorSolicitud {
         // Devuelve la vista solicitar-tarjeta
         return "solicitarTarjeta";
     }
+
+   /* @PostMapping("/volver")
+    public String volverListaT(){
+
+            return "listaTransacciones";
+        }*/
+
+
 }
