@@ -1,7 +1,7 @@
 package ucentral.edu.co.appBanco.servicios;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import ucentral.edu.co.appBanco.entidades.Transacciones;
 import ucentral.edu.co.appBanco.operaciones.OperacionesTransacciones;
 import ucentral.edu.co.appBanco.repositorios.RepositorioTransaccion;
 
-import java.util.List;
+
 
 @Service
 public class ServiciosTransaccion implements OperacionesTransacciones {
@@ -21,6 +21,13 @@ public class ServiciosTransaccion implements OperacionesTransacciones {
 
     @Override
     public Transacciones crear(Transacciones transacciones) {
+
+        if(transacciones.getCuotas()> 3){
+            double interesesmensual= 0.012;
+            double interesTotal=transacciones.getMonto()*interesesmensual*transacciones.getCuotas();
+            transacciones.setMonto(transacciones.getMonto()+ interesTotal);
+
+        }
         return repositorioTransaccion.save(transacciones);
     }
 

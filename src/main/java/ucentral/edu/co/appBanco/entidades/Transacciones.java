@@ -26,7 +26,11 @@ public class Transacciones implements Serializable {
         private String descripcion;
 
         @Column(name = "TRAN_MONTO", nullable = false)
-        private int monto;
+        private double monto;
+
+        @Column(name = "TRAN_CUOTAS", nullable = false)
+        private int cuotas;
+
 
         @Column(name = "TRAN_ESTABLECIMIENTO", nullable = false)
         private String establecimiento;
