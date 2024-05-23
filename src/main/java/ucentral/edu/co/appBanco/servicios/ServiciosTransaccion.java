@@ -21,13 +21,6 @@ public class ServiciosTransaccion implements OperacionesTransacciones {
 
     @Override
     public Transacciones crear(Transacciones transacciones) {
-
-        if(transacciones.getCuotas()> 3){
-            double interesesmensual= 0.012;
-            double interesTotal=transacciones.getMonto()*interesesmensual*transacciones.getCuotas();
-            transacciones.setMonto(transacciones.getMonto()+ interesTotal);
-
-        }
         return repositorioTransaccion.save(transacciones);
     }
 

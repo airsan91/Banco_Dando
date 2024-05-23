@@ -58,7 +58,8 @@
                     <th>Codigo</th>
                     <th>Fecha</th>
                     <th>Descripcion</th>
-                    <th>Monto</th>
+                    <th>Monto Sin Intereses</th>
+                    <th>Monto Con Intereses</th>
                     <th>Cuotas</th>
                     <th>Establecimiento</th>
                 </tr>
@@ -69,6 +70,7 @@
                     <td th:text="${dato.fecha}">Fecha</td>
                     <td th:text="${dato.descripcion}">Descripcion</td>
                     <td th:text="${dato.monto}">Monto</td>
+                    <td th:text="${dato.monto + (dato.monto * 0.012 * dato.cuotas)}">Monto con Intereses</td>
                     <td th:text="${dato.cuotas}">Cuotas</td>
                     <td th:text="${dato.establecimiento}">Establecimiento</td>
                 </tr>
