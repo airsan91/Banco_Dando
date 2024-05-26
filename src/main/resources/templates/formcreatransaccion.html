@@ -36,6 +36,14 @@
                        required autofocus="autofocus">
 
             </div>
+
+
+    <div class="form-group">
+        <label class="control-label" for="cuotas">Cuotas : </label>
+        <input id="cuotas" type="text" class="form-control" th:field="*{cuotas}"
+               required autofocus="autofocus">
+
+    </div>
             <div class="form-group">
                 <label class="control-label" for="establecimiento">Establecimiento : </label>
                 <input id="establecimiento" type="text" class="form-control" th:field="*{establecimiento}"
@@ -51,7 +59,7 @@
             </div>
         </form>
     </div>
-    <a class="btn btn-primary" href="#" th:href="@{/transaccion/lista}">volver</a>
+    <a class="btn btn-primary" href="#" th:href="@{/listaTransaccionesT}">volver</a>
 </div>
 </body>
 </html>

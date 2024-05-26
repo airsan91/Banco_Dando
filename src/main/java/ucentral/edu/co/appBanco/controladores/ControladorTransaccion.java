@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
 import ucentral.edu.co.appBanco.servicios.ServiciosTransaccion;
 
+
+
 @Controller
 public class ControladorTransaccion {
     @Autowired
@@ -41,7 +43,7 @@ public class ControladorTransaccion {
     public String accioncrearTran(@ModelAttribute("transaccionllenar")Transacciones transacciones){
         System.out.println(transacciones);
         this.serviciosTransaccion.crear(transacciones);
-        return "redirect:/transaccion/lista";
+        return "redirect:/listaTransaccionesT";
     }
 
 
@@ -50,4 +52,6 @@ public class ControladorTransaccion {
     }
 
 }
+
+
 
