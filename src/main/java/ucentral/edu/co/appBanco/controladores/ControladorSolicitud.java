@@ -17,6 +17,7 @@ import ucentral.edu.co.appBanco.entidades.Transacciones;
 import ucentral.edu.co.appBanco.servicios.ServiciosSolicitud;
 import ucentral.edu.co.appBanco.servicios.ServiciosTransaccion;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -88,15 +89,25 @@ public class ControladorSolicitud {
     @PostMapping("/solicitarTarjeta")
     public String solicitarTarjeta(@ModelAttribute Solicitud solicitud) {
         solicitud.setEstado("Pendiente");
+        solicitud.setFechaCreacion(new Date());
         serviciosSolicitud.crear(solicitud);
         return "redirect:/estado-solicitud";
     }
     @GetMapping("/listaTransacciones")
     public String listaTransacciones(Model model) {
+        Solicitud ultimaSolicitud = serviciosSolicitud.getUltimaSolicitud();
+        if (ultimaSolicitud != null) {
+            model.addAttribute("estadoSolicitud", ultimaSolicitud.getEstado());
+        } else {
+            model.addAttribute("estadoSolicitud", "No hay solicitudes");
+        }
+
+        // Obtener la lista de transacciones
         PageRequest pageable = PageRequest.of(0, 10, Sort.by("codigoTran"));
         Page<Transacciones> page = serviciosTransaccion.consultarT(pageable);
         List<Transacciones> transacciones = page.getContent();
         model.addAttribute("listatransaccionT", transacciones);
+
         return "listaTransacciones";
     }
     @GetMapping("/solicitar-tarjeta")

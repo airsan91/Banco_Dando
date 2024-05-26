@@ -20,11 +20,6 @@
         <form th:action="@{/accioncreartransaccion}" method="post" th:object="${transaccionesllenar}">
 
             <div class="form-group">
-                <label class="control-label" for="fecha">Fecha: </label>
-                <input id="fecha" type="text" class="form-control" th:field="*{fecha}"
-                       required autofocus="autofocus">
-            </div>
-            <div class="form-group">
                 <label class="control-label" for="descripcion">Descripcion : </label>
                 <input id="descripcion" type="text" class="form-control" th:field="*{descripcion}"
                        required autofocus="autofocus">

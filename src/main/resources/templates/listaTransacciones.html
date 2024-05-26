@@ -21,7 +21,6 @@
             <hr>
         </div>
     </div>
-
     <div class="row mb-3">
         <div class="col-md-12">
             <div class="row justify-content-center">
@@ -38,12 +37,14 @@
             </div>
         </div>
     </div>
-
-    <div class="row mb-3">
+    <!-- Botón de Adicionar Transacción -->
+    <div class="row mb-3" th:if="${estadoSolicitud == 'Solicitud Aceptada'}">
         <div class="col-md-12">
             <a class="btn btn-primary btn-lg btn-block" href="#" th:href="@{/transaccion/nuevo}">Adicionar Transaccion</a>
         </div>
     </div>
+
+    <!-- Resto del contenido HTML -->
 
     <div class="row">
         <div class="col-md-12">

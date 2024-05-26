@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class Transacciones implements Serializable {
         private int codigoTran;
 
         @Column(name = "TRAN_FECHA", nullable = false)
-        private String fecha;
+        private Date fecha;
 
         @Column(name = "TRAN_DESCRIPCION", nullable = false)
         private String descripcion;

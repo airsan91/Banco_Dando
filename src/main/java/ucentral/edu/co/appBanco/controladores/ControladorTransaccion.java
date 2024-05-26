@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
 import ucentral.edu.co.appBanco.servicios.ServiciosTransaccion;
 
+import java.util.Date;
 
 
 @Controller
@@ -42,7 +43,10 @@ public class ControladorTransaccion {
     @PostMapping({"/accioncreartransaccion"})
     public String accioncrearTran(@ModelAttribute("transaccionllenar")Transacciones transacciones){
         System.out.println(transacciones);
+
+        transacciones.setFecha(new Date());
         this.serviciosTransaccion.crear(transacciones);
+
         return "redirect:/listaTransaccionesT";
     }
 
