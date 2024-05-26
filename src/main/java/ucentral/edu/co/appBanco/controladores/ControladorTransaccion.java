@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ucentral.edu.co.appBanco.entidades.Solicitud;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
+import ucentral.edu.co.appBanco.servicios.ServiciosSolicitud;
 import ucentral.edu.co.appBanco.servicios.ServiciosTransaccion;
 
 import java.util.Date;
@@ -19,7 +21,9 @@ import java.util.Date;
 @Controller
 public class ControladorTransaccion {
     @Autowired
-    ServiciosTransaccion serviciosTransaccion;
+    private ServiciosTransaccion serviciosTransaccion;
+    @Autowired
+    private ServiciosSolicitud serviciosSolicitud;
 
     @GetMapping("/listaTransaccionesT")
     public String listaTransacciones(Model model, @RequestParam(defaultValue = "0") int page) {
@@ -41,13 +45,18 @@ public class ControladorTransaccion {
     }
 
     @PostMapping({"/accioncreartransaccion"})
-    public String accioncrearTran(@ModelAttribute("transaccionllenar")Transacciones transacciones){
+    public String accioncrearTran(@ModelAttribute("transaccionllenar")Transacciones transacciones, Model model){
         System.out.println(transacciones);
 
         transacciones.setFecha(new Date());
         this.serviciosTransaccion.crear(transacciones);
-
-        return "redirect:/listaTransaccionesT";
+        Solicitud ultimaSolicitud = serviciosSolicitud.getUltimaSolicitud();
+        if (ultimaSolicitud != null) {
+            model.addAttribute("estadoSolicitud", ultimaSolicitud.getEstado());
+        } else {
+            model.addAttribute("estadoSolicitud", "No hay solicitudes");
+        }
+        return "redirect:/listaTransacciones";
     }
 
 
