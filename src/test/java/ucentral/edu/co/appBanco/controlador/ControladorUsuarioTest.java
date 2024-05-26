@@ -36,8 +36,8 @@ import ucentral.edu.co.appBanco.servicios.ServicioUsuario;
         Usuario usuario= Usuario
                 .builder()
                 .codigo(1)
-                .nombreUsuario("erick trujillo")
-                .correoUsuario("etrujillo@gmail.com")
+                .nombreUsuario("santiago esquivel")
+                .correoUsuario("santiago@gmail.com")
                 .telefonoUsuario(31125554)
                 .contrasena("12345")
                 .build();

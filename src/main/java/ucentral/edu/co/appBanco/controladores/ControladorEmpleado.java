@@ -23,8 +23,8 @@ public class ControladorEmpleado {
 
     @GetMapping("/solicitarTarjeta")
     public String getAllSolicitarTarjeta(Model model) {
-        List<SolicitarTarjeta> solicitarTarjetas = servicioEmpleado.getAllSolicitarTarjeta();
-        model.addAttribute("solicitarTarjetas", solicitarTarjetas);
+        List<Solicitud> solicitudesPendientes = servicioEmpleado.getSolicitudesPendientes();
+        model.addAttribute("solicitudesPendientes", solicitudesPendientes);
         return "solicitarTarjeta";
     }
 

@@ -8,4 +8,6 @@ import java.util.List;
 public interface RepositorioSolicitud extends JpaRepository<Solicitud,Integer> {
     Solicitud findTopByOrderByFechaCreacionDesc();
     Solicitud findByCodigo(int codigo);
+
+    List<Solicitud> findAllByDecisionIsNull();
 }

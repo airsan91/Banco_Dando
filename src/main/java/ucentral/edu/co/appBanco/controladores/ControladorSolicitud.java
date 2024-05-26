@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ucentral.edu.co.appBanco.entidades.Solicitud;
 import ucentral.edu.co.appBanco.entidades.Transacciones;
@@ -108,5 +109,23 @@ public class ControladorSolicitud {
 
         // Devuelve la vista solicitar-tarjeta
         return "solicitarTarjeta";
+    }
+    @GetMapping("/solicitudesPendientes")
+    public String getPendientes(Model model) {
+        List<Solicitud> solicitudesPendientes = serviciosSolicitud.getSolicitudesPendientes();
+        model.addAttribute("solicitudesPendientes", solicitudesPendientes);
+        return "solicitarTarjeta";
+    }
+
+    @PostMapping("/aceptarSolicitud")
+    public String aceptarSolicitud(@RequestParam int codigo) {
+        serviciosSolicitud.aceptarSolicitud(codigo);
+        return "redirect:/solicitudesPendientes";
+    }
+
+    @PostMapping("/rechazarSolicitud")
+    public String rechazarSolicitud(@RequestParam int codigo) {
+        serviciosSolicitud.rechazarSolicitud(codigo);
+        return "redirect:/solicitudesPendientes";
     }
 }

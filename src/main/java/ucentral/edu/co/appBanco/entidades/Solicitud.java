@@ -51,4 +51,12 @@ public class Solicitud  implements Serializable {
     public String toString() {
         return "Solicitud [codigo=" + codigo + ", estado=" + estado + "]";
     }
+
+    @Column(name="SOL_DECISION")
+    private String decision;
+
+    @javax.persistence.PrePersist
+    protected void onCreate() {
+        fechaCreacion = new Date();
+    }
 }

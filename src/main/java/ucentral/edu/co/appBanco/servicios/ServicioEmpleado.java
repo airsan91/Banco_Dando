@@ -93,4 +93,7 @@ public class ServicioEmpleado {
         solicitud.setEstado("Rechazada");
         repositorioSolicitud.save(solicitud);
     }
+    public List<Solicitud> getSolicitudesPendientes() {
+        return repositorioSolicitud.findAllByDecisionIsNull();
+    }
 }

@@ -18,12 +18,8 @@ public class ServiciosSolicitud implements OperacionesSolicitud {
 
     @Override
     public Solicitud crear(Solicitud solicitud) {
-        System.out.println("Before save: " + solicitud);
-        solicitud.setFechaCreacion(new Date());
-        solicitud.setEstado("No se ha hecho una solicitud");
-        Solicitud savedSolicitud = repositorioSolicitud.save(solicitud);
-        System.out.println("After save: " + savedSolicitud);
-        return savedSolicitud;
+        solicitud.setEstado("No se ha enviado ninguna solicitud"); // Set the estado to "No se ha enviado ninguna solicitud"
+        return repositorioSolicitud.save(solicitud);
     }
 
     @Transactional(readOnly = true)
@@ -41,11 +37,31 @@ public class ServiciosSolicitud implements OperacionesSolicitud {
         return repositorioSolicitud.findByCodigo(codigo);
     }
 
-    @Transactional
     public void enviarSolicitud(Solicitud solicitud) {
+        solicitud.setEstado("Solicitud Pendiente"); // Update the estado to "Solicitud Pendiente"
         repositorioSolicitud.save(solicitud);
     }
 
+    public List<Solicitud> getSolicitudesPendientes() {
+        return repositorioSolicitud.findAllByDecisionIsNull();
+    }
 
+    public void aceptarSolicitud(int codigo) {
+        Solicitud solicitud = repositorioSolicitud.findByCodigo(codigo);
+        if (solicitud != null) {
+            solicitud.setDecision("Accepted");
+            solicitud.setEstado("Solicitud Aceptada"); // Update the estado to "Solicitud Aceptada"
+            repositorioSolicitud.save(solicitud);
+        }
+    }
+
+    public void rechazarSolicitud(int codigo) {
+        Solicitud solicitud = repositorioSolicitud.findByCodigo(codigo);
+        if (solicitud != null) {
+            solicitud.setDecision("Rejected");
+            solicitud.setEstado("Solicitud Rechazada"); // Update the estado to "Solicitud Rechazada"
+            repositorioSolicitud.save(solicitud);
+        }
+    }
 
 }
