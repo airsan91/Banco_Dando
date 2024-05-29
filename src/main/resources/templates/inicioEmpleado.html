@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Iniciar sesión como empleado</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #343a40;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+
+        h2 {
+            margin-bottom: 1em;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .mb-3 {
+            margin-bottom: 1em;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5em 1em;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-lg {
+            padding: 1em 2em;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2em;
+        }
+
+        .col-6 {
+            flex: 0 0 calc(50% - 1em);
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5 mb-4">Inicio Empleado</h2>
+
+    <form action="/inicioEmpleado" method="post">
+        <div class="mb-3">
+            <label for="usuario" class="form-label">Usuario:</label>
+            <input type="text" class="form-control" id="usuario" name="usuario" required>
+        </div>
+        <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </form>
+
+    <div class="row mt-5">
+        <div class="col-6 mb-3">
+            <a class="btn btn-secondary btn-lg" href="#" th:href="@{http://localhost:8862/}">Volver</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
